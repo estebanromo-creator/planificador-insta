@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { getDashboardData } from "../services/api";
+import { useNavigate } from "react-router-dom";
 import { Bell, MessageCircle, Heart, Inbox } from "lucide-react";
 
 export default function Dashboard() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getDashboardData().then(res => {
@@ -26,15 +28,15 @@ export default function Dashboard() {
       </div>
 
       <div className="dashboard-grid">
-        <div className="card stat-card">
+        <div className="card stat-card" style={{cursor: 'pointer'}} onClick={() => navigate("/comments")}>
           <span className="stat-title"><MessageCircle size={16} style={{display:'inline', marginBottom:'-3px'}}/> Comentarios Nuevos</span>
           <span className="stat-value">{data.stats.newComments}</span>
         </div>
-        <div className="card stat-card">
+        <div className="card stat-card" style={{cursor: 'pointer'}} onClick={() => alert("El módulo de Mensajes Privados estará disponible en la próxima actualización.")}>
           <span className="stat-title"><Inbox size={16} style={{display:'inline', marginBottom:'-3px'}}/> Mensajes Privados</span>
           <span className="stat-value">{data.stats.newMessages}</span>
         </div>
-        <div className="card stat-card">
+        <div className="card stat-card" style={{cursor: 'pointer'}} onClick={() => alert("El módulo de Analíticas detalladas estará disponible pronto.")}>
           <span className="stat-title"><Heart size={16} style={{display:'inline', marginBottom:'-3px'}}/> Likes Totales (Hoy)</span>
           <span className="stat-value">{data.stats.likesCard}</span>
         </div>
