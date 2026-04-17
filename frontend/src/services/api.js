@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:3000/api"
+  baseURL: "https://planificador-insta-backend.onrender.com/api"
 });
 
 export const getDashboardData = () => API.get("/dashboard").then(res => res.data);
